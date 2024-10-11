@@ -20,7 +20,7 @@ const config = {
     extend: {
       colors: {
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
+        input: "#1E293B",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -41,7 +41,7 @@ const config = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
+          DEFAULT: "#B6FBFF",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
@@ -51,6 +51,17 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        code: {
+          background: "#1E293B", // Dark background for code blocks
+          text: "#D1D5DB", // Light text color for code blocks
+          keyword: "#FF79C6",
+          string: "#F1FA8C",
+          number: "#BD93F9",
+          function: "#50FA7B",
+          comment: "#6272A4",
+          variable: "#F8F8F2",
+          operator: "#FF79C6",
         },
       },
       borderRadius: {

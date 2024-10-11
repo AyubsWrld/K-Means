@@ -1,74 +1,26 @@
----
+## **Features**
+- **Route Optimization**: Efficiently plan and optimize delivery routes for multiple drivers.
+- **Clustering Locations**: Automatically group delivery locations into clusters based on the number of available drivers.
+- **Real-Time Driver Tracking**: Monitor drivers’ real-time location updates and estimated time of arrival (ETA).
+- **Driver Assignment**: Automatically assign deliveries to drivers based on optimized routes.
+- **Delivery Management**: Create, manage, and track the status of deliveries.
+- **Customer Updates**: Notify customers of delivery status and allow them to track their packages in real-time.
+- **Notification System**: Send SMS, email, or push notifications to drivers, customers, and dispatchers.
 
-title: Introduction  
-description: This section provides an overview of how to get started with loading the Lucidity application on your phone.
-
----
-
-## Introduction
-
-Welcome to the Lucidity App setup guide! This document will help you get the app running on your device in no time. Follow the steps carefully to load the application in a sandbox environment and on a physical device.
-
-### Getting Started
-
-To open the Lucidity App within a sandbox environment, follow these steps:
-
-#### 1. Clone the Repository
-
-Begin by cloning the Lucidity repository to your local machine using the following command:
-
-```bash {7} 
-git clone --recursive https://github.com/AyubsWrld/Lucidity
-```
-
-#### 2. Install the [Expo GO](https://expo.dev/go) Mobile App
-
-Download the **Expo GO** mobile application on your phone. This will enable you to run the Lucidity App in a sandbox environment on your mobile device.
-
-#### 3. Run the Setup Commands
-
-Once the repository is cloned, open a terminal, navigate to the project folder, and execute the following commands:
-
-```bash {7} 
-cd Lucidity
-npm install
-npm expo start 
-```
-
-This will install the necessary dependencies and start the development server.
-
----
-
-## Loading the Application onto a Physical Device
-
-After running the commands above, the **Metro Bundler** will generate a QR code in your terminal. Follow these steps to load the app onto your physical device:
-
-1. **Scan the QR code** using the Expo GO app on your phone.
-2. The Lucidity App will automatically open in the Expo GO environment.
-
-> *"Documentation is a love letter that you write to your future self."*  
-> — Damian Conway
-
----
-
-{/* 
-## Code Example
-
-Below is an example code block that demonstrates how to structure a theme provider within your application. 
-
-```jsx {7} showLineNumbers
-import ThemeProvider from "./theme-provider";
-
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  );
-}
-``` 
-*/}
-
+## **Tech Stack**
+- **Frontend**:
+  - Web App: Built with React.js
+  - Mobile App: Developed with React Native
+- **Backend**:
+  - Node.js + Express.js (Microservices Architecture)
+  - Real-time data handling with Socket.io
+  - REST API for interacting with external services
+- **Databases**:
+  - PostgreSQL for relational data (e.g., users, deliveries)
+  - MongoDB/Redis for real-time tracking data
+  - PostGIS for geo-spatial queries
+- **External APIs**:
+  - Google Maps API / Circuit API for route optimization
+  - Twilio for SMS notifications
+  - Stripe/PayPal (optional) for payment handling
 

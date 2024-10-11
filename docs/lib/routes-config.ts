@@ -9,66 +9,25 @@ export type EachRoute = {
 
 export const ROUTES: EachRoute[] = [
   {
-    title: "Getting Started",
+    title: "Overview",
     href: "/getting-started",
     noLink: true,
     items: [
       { title: "Introduction", href: "/introduction" },
-      // {
-      //   title: "Installation",
-      //   href: "/installation",
-      //   items: [
-      //     { title: "Laravel", href: "/laravel" },
-      //     { title: "React", href: "/react" },
-      //     { title: "Gatsby", href: "/gatsby" },
-      //     { title: "Test", href: "/test" },
-      //   ],
-      // },
     ],
   },
   {
-    title: "Contributions",
-    href: "/contributions",
-    noLink: true,  // Parent item, no direct link
+    title: "System Architecture",
+    href: "/sysarch",
+    noLink: true,
     items: [
-      { title: "Documentation Contributions", href: "/documentation" },  // Clickable
-      { 
-        title: "Codebase Contributions",
-        href: "/codebase" ,
-        noLink: true , // dont set to false or else boom 
-        items : [
-          { title: "react-native", href: "/frontend" },  // Clickable
-          // { title: "react-native", href: "/frontend" },  // Clickable
-        ],
-      },  // Clickable
-    ]
-  },
-  {
-    title : "React-Native Integration",
-    href: "/react-native",
-    noLink : true, 
-    items : [
-      {title: "react-native-reanimated" , href : "/react-native-reanimated"} , 
-      {title: "Navigation" , href : "/routing"} , 
+      { title: "Authentication", href: "/oauth" },
+      { title: "Route", href: "/route" },
+      { title: "Driver Management", href: "/management" },
+      { title: "Real-Time Tracking Service", href: "/tracking" },
+      { title: "Notifications", href: "/notifications" },
     ],
   },
-  {
-    title : "Timeline",
-    href: "/progress",
-  },
-  // { We dont need this anymore . 
-  //   title: "Design Document",  href: "/designdoc"  
-  // },
-  {
-    title : "Database Integration",
-    href: "/db",
-    noLink : true, 
-    items : [
-      {title: "Relation Schematic" , href : "/schematic"} , 
-      {title: "Supabase User Authentication" , href : "/supabase"} , 
-    ],
-  },
-
 ];
 
 type Page = { title: string; href: string };
