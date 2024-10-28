@@ -29,6 +29,9 @@ export const ROUTES: EachRoute[] = [
       { title: "Clustering Algorithm", href: "/clustering" },
     ],
   },
+  {
+    title: "Circuit Implementation", href: "/circuit",
+  },
 ];
 
 type Page = { title: string; href: string };
