@@ -21,11 +21,12 @@ export const ROUTES: EachRoute[] = [
     href: "/sysarch",
     noLink: true,
     items: [
-      { title: "Authentication", href: "/oauth" },
+      { title: "Clustering", href: "/oauth" },
       { title: "Route", href: "/route" },
       { title: "Driver Management", href: "/management" },
       { title: "Real-Time Tracking Service", href: "/tracking" },
       { title: "Notifications", href: "/notifications" },
+      { title: "Clustering Algorithm", href: "/clustering" },
     ],
   },
 ];
