@@ -9,23 +9,55 @@ export type EachRoute = {
 
 export const ROUTES: EachRoute[] = [
   {
-    title: "Overview",
+    title: "Project Overview",
     href: "/getting-started",
     noLink: true,
     items: [
-      { title: "Introduction", href: "/introduction" },
+      { title: "Abstract", href: "/abstract" },
+      { title: "Background", href: "/background" },
     ],
   },
   {
-    title: "System Architecture",
+    title: "System Level Design",
     href: "/sysarch",
     noLink: true,
     items: [
-      { title: "Authentication", href: "/oauth" },
-      { title: "Route", href: "/route" },
-      { title: "Driver Management", href: "/management" },
-      { title: "Real-Time Tracking Service", href: "/tracking" },
-      { title: "Notifications", href: "/notifications" },
+      { title: "System Requirements", href: "/sysreq" },
+      { title: "Functional Requirements", href: "/funcreq" },
+      { title: "User InterFace Requirements", href: "/uireq" },
+      { title: "Nonfunctional Requirements", href: "/nfreq" },
+      { title: "Technical Architecture", href: "/techarch" },
+    ],
+  },
+  {
+    title: "Detailed Description",
+    href: "/detdesc",
+    noLink: true,
+    items: [
+      { title: "Core Algorithms",
+        href: "/corealgos",
+        noLink : true , 
+        items :[
+          { title: "Route Optimization Algorithm", href: "/routeoa" },
+          { title: "Data Model", href: "/datamodel" },
+        ]
+      },
+      { title: "External Integrations",
+        href: "/externalintegration",
+        noLink : true , 
+        items :[
+          { title: "Required APIs", href: "/reqapi" },
+        ]
+      },
+      { title: "Mobile Application Specifications", href: "/mobilespec" },
+    ],
+  },
+  {
+    title: "Testing",
+    href: "/testing",
+    noLink: true,
+    items: [
+      { title: "Testing Levels", href: "/testlevel" },
     ],
   },
 ];

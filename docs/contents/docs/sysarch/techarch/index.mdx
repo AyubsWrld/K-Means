@@ -1,0 +1,42 @@
+---
+title: Technical Architecture
+description: Overview of the technical architecture, including frontend and backend components, and the reasons for selecting each technology.
+---
+
+## Technical Architecture
+
+The technical architecture defines the core structure of the route optimization platform, including the technologies used for both the frontend and backend components. The chosen technologies are selected based on their ability to provide scalability, performance, flexibility, and ease of integration, ensuring that the system can handle a high volume of requests, real-time data, and complex user interactions.
+
+### 2.4.1 Frontend Components
+
+The frontend components will provide the user interfaces for the mobile app, web dashboard, and customer tracking portal. The following technologies have been selected to meet the needs of the platform:
+
+- **React Native Mobile Application:** React Native is chosen for developing the mobile application due to its ability to create cross-platform applications for both iOS and Android. It allows for fast development, code reuse, and a native-like user experience. React Native ensures the app can handle real-time updates, GPS tracking, and push notifications with excellent performance across devices.
+
+- **React.js Web Dashboard:** React.js is chosen for building the dispatcher web dashboard due to its component-based architecture, which promotes reusability and maintainability. React.js is highly efficient for rendering dynamic data, and its ecosystem of libraries (e.g., Redux for state management) makes it ideal for handling complex operations like route optimization, driver management, and real-time tracking.
+
+- **Progressive Web App (PWA) for Customer Tracking:** A Progressive Web App is selected for the customer tracking portal because of its ability to offer a near-native app experience via the web. PWAs are lightweight, fast, and can be used offline, making them an excellent choice for customers who may not want to download a full mobile app but still need real-time updates and notifications about their deliveries.
+
+### 2.4.2 Backend Components
+
+The backend components will power the application’s logic, handle data storage, and manage real-time communications between drivers, dispatchers, and customers. The following technologies have been selected for the backend:
+
+- **Node.js/Express.js Server:** Node.js is chosen as the backend runtime due to its non-blocking, event-driven architecture, which makes it highly suitable for real-time applications like delivery tracking. Express.js, built on top of Node.js, provides a lightweight framework for building RESTful APIs and handling routing, middleware, and HTTP requests efficiently. This combination is known for its scalability and speed, making it ideal for handling multiple concurrent users and requests in a high-demand environment.
+
+- **PostgreSQL Database:** PostgreSQL is selected as the relational database because of its robustness, scalability, and support for complex queries and transactions. It is well-suited to store structured data such as user profiles, delivery details, time windows, and route information. PostgreSQL is also ACID-compliant, ensuring data integrity and reliability, which is critical for a delivery platform where accurate tracking and transaction management are essential.
+
+- **Redis Cache:** Redis is chosen as an in-memory data store to improve performance by caching frequently accessed data. It will be used for caching route optimization results, delivery statuses, and real-time location data, reducing the load on the database and speeding up response times for frequently requested data. Redis is highly performant and scales horizontally, making it a valuable addition to the system's infrastructure.
+
+- **Docker Containerization:** Docker is chosen for containerizing the application’s components to ensure consistency and ease of deployment across different environments. It allows the backend services to run in isolated containers, simplifying management, scalability, and deployment. Docker ensures that the application runs reliably regardless of the deployment environment and supports a microservices architecture if the system scales in the future.
+
+- **AWS Infrastructure:** AWS (Amazon Web Services) is selected for hosting the backend infrastructure due to its scalability, reliability, and wide range of services, including compute, storage, and networking. AWS provides flexible resources that can scale up or down based on traffic and demand, ensuring that the platform can handle high volumes of requests during peak times. Additionally, AWS services like Amazon RDS (for PostgreSQL), S3 (for file storage), and Lambda (for serverless computing) offer a robust, cost-effective, and highly available infrastructure for the application.
+
+### Why These Technologies Were Chosen
+
+Each technology has been selected for its ability to meet specific requirements of the route optimization platform:
+
+- **Frontend Components:** React Native and React.js provide high performance, flexibility, and developer efficiency, allowing for rapid development across multiple platforms. The PWA approach offers customers an easy way to access delivery tracking with minimal friction and no app installation required.
+  
+- **Backend Components:** Node.js and Express.js are ideal for real-time, high-performance web applications, ensuring that the platform can handle concurrent requests from drivers, dispatchers, and customers. PostgreSQL offers the reliability and performance needed to handle transactional data, while Redis speeds up data retrieval for frequently accessed information. Docker provides the flexibility and ease of deployment, while AWS ensures that the platform is scalable and can meet the needs of a growing user base.
+
+By using these technologies, the platform will be able to deliver a fast, reliable, and scalable experience that meets the needs of both logistics companies and customers.

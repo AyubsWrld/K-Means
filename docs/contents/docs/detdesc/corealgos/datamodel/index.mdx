@@ -1,0 +1,235 @@
+---
+title: Data Models
+description: Overview of the database schema used for managing deliveries, routes, drivers, customers, and other related entities in the application.
+---
+
+## Data Models
+
+The system requires multiple interconnected data models to store and manage essential information about deliveries, routes, drivers, customers, and related entities. The following database schema outlines the structure needed to support the route optimization platform, ensuring data integrity, efficient querying, and scalability.
+
+### 1. **Deliveries Schema**
+
+The `deliveries` table stores information about individual deliveries, including details like customer, address, time windows, priority, and delivery status.
+
+```sql
+-- Delivery Schema
+CREATE TABLE deliveries (
+    id UUID PRIMARY KEY,
+    customer_id UUID,
+    address TEXT,
+    time_window_start TIMESTAMP,
+    time_window_end TIMESTAMP,
+    priority INTEGER,
+    status VARCHAR(50),
+    cluster_id UUID,  -- Link to the cluster this delivery belongs to
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **customer_id**: Foreign key referencing the `customers` table, identifying the customer for the delivery.
+- **time_window_start** and **time_window_end**: Define the time window in which the delivery should occur.
+- **priority**: Integer indicating the delivery priority (e.g., urgent deliveries could have a higher number).
+- **status**: The current status of the delivery (e.g., pending, completed, in transit).
+- **cluster_id**: Link to the delivery cluster assigned by the K-means algorithm.
+
+---
+
+### 2. **Routes Schema**
+
+The `routes` table tracks the delivery routes assigned to drivers, including route status, optimization version, and associated driver information.
+
+```sql
+-- Route Schema
+CREATE TABLE routes (
+    id UUID PRIMARY KEY,
+    driver_id UUID,
+    date DATE,
+    status VARCHAR(50),
+    optimization_version INTEGER,
+    route_start_time TIMESTAMP,
+    route_end_time TIMESTAMP,
+    total_distance DOUBLE PRECISION,  -- Estimated route distance in kilometers
+    total_duration INTEGER,  -- Total duration of the route in seconds
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **driver_id**: Foreign key referencing the `drivers` table, indicating the driver assigned to this route.
+- **route_start_time** and **route_end_time**: Track the start and end time of the route.
+- **total_distance** and **total_duration**: Store the total distance and duration for the route, useful for reporting and optimization purposes.
+- **status**: Current route status (e.g., scheduled, in progress, completed).
+
+---
+
+### 3. **Drivers Schema**
+
+The `drivers` table stores information about drivers, including their personal details and availability for routing.
+
+```sql
+-- Drivers Schema
+CREATE TABLE drivers (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100),
+    phone_number VARCHAR(20),
+    email VARCHAR(100),
+    vehicle_id UUID,  -- Link to the vehicle assigned to the driver
+    available BOOLEAN DEFAULT TRUE,  -- Driver's availability status
+    assigned_route_id UUID,  -- Link to the current assigned route
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **vehicle_id**: Foreign key referencing the `vehicles` table, indicating the vehicle assigned to the driver.
+- **available**: Indicates whether the driver is available for assignments.
+- **assigned_route_id**: The route currently assigned to the driver.
+
+---
+
+### 4. **Vehicles Schema**
+
+The `vehicles` table stores information about the vehicles used for deliveries, including their capacity and type.
+
+```sql
+-- Vehicles Schema
+CREATE TABLE vehicles (
+    id UUID PRIMARY KEY,
+    vehicle_type VARCHAR(50),
+    capacity DOUBLE PRECISION,  -- Maximum weight the vehicle can carry (in kilograms)
+    fuel_efficiency DOUBLE PRECISION,  -- Fuel consumption rate (liters per km)
+    current_location POINT,  -- Current geographical location of the vehicle (lat, long)
+    status VARCHAR(50),  -- Vehicle status (e.g., available, in use, under maintenance)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **capacity**: Maximum weight the vehicle can carry, important for ensuring that the vehicle isn’t overloaded.
+- **fuel_efficiency**: Fuel consumption rate, which can be used for optimizing fuel costs and route planning.
+- **current_location**: Geospatial point indicating the vehicle’s current location, useful for real-time tracking and route adjustments.
+
+---
+
+### 5. **Customers Schema**
+
+The `customers` table stores information about customers who place delivery orders.
+
+```sql
+-- Customers Schema
+CREATE TABLE customers (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100),
+    phone_number VARCHAR(20),
+    email VARCHAR(100),
+    address TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **name**, **phone_number**, **email**: Contact details of the customer.
+- **address**: Customer’s address for deliveries.
+
+---
+
+### 6. **Time Windows Schema**
+
+The `time_windows` table is designed to manage time window constraints for deliveries.
+
+```sql
+-- Time Windows Schema
+CREATE TABLE time_windows (
+    id UUID PRIMARY KEY,
+    delivery_id UUID,  -- Foreign key linking to the deliveries table
+    start_time TIMESTAMP,
+    end_time TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **delivery_id**: Foreign key to the `deliveries` table, linking each time window to a specific delivery.
+- **start_time** and **end_time**: Define the time frame within which the delivery must occur.
+
+---
+
+### 7. **Delivery Status History Schema**
+
+The `delivery_status_history` table stores the historical status changes for deliveries, providing an audit trail.
+
+```sql
+-- Delivery Status History Schema
+CREATE TABLE delivery_status_history (
+    id UUID PRIMARY KEY,
+    delivery_id UUID,
+    status VARCHAR(50),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **delivery_id**: Foreign key referencing the `deliveries` table, tracking the status of the respective delivery.
+- **status**: The status the delivery was in at a particular point in time.
+- **timestamp**: The timestamp when the status change occurred.
+
+---
+
+### 8. **Logs Schema**
+
+The `logs` table will track system activity, helping with debugging, monitoring, and auditing the system.
+
+```sql
+-- Logs Schema
+CREATE TABLE logs (
+    id UUID PRIMARY KEY,
+    event_type VARCHAR(50),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **event_type**: Type of event being logged (e.g., error, info, warning).
+- **message**: A detailed message describing the event.
+- **created_at**: Timestamp when the log entry was created.
+
+---
+
+### 9. **Geospatial Data Schema**
+
+The `geospatial_data` table stores coordinates and geospatial data relevant to routing.
+
+```sql
+-- Geospatial Data Schema
+CREATE TABLE geospatial_data (
+    id UUID PRIMARY KEY,
+    delivery_id UUID,  -- Foreign key to deliveries table
+    coordinates POINT,  -- Latitude and Longitude as a point (lat, long)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **coordinates**: The geographical point (latitude and longitude) where the delivery is located.
+
+---
+
+### 10. **Admin Dashboard Schema**
+
+The `admin_dashboard` table stores settings and user preferences for the administrative dashboard interface.
+
+```sql
+-- Admin Dashboard Schema
+CREATE TABLE admin_dashboard (
+    id UUID PRIMARY KEY,
+    user_id UUID,  -- Foreign key to admin users
+    setting_key VARCHAR(100),
+    setting_value TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+- **user_id**: Foreign key to the `admin_users` table, identifying the admin user.
+- **setting_key** and **setting_value**: Key-value pairs for customizable dashboard settings.
+
+
