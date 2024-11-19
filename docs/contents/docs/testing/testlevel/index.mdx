@@ -7,7 +7,7 @@ description: Overview of the testing strategy, including different testing level
 
 The testing strategy for the route optimization application will be structured to ensure the system’s functionality, performance, and reliability. It will cover different testing levels, each focusing on specific aspects of the system to guarantee quality and robustness across the application. The following sections describe the key testing levels involved.
 
-### **4.1 Testing Levels**
+### **4.1.1 Testing Levels**
 
 #### **Unit Testing**
 
@@ -19,12 +19,10 @@ Unit testing will be used to verify individual components of the system, ensurin
   
 - **API Endpoints**: Unit testing will also be conducted on individual API endpoints to verify that each endpoint behaves as expected under different conditions, such as valid and invalid inputs. This helps catch issues early and ensures each API is functioning independently before integration with other parts of the system.
 
-**Why Unit Testing?**
-Unit testing allows for the identification of errors at an early stage, improving code quality and making maintenance easier. By testing small components in isolation, we can ensure that each function or module operates correctly, minimizing the risk of defects in the final system.
 
 ---
 
-#### **Integration Testing**
+#### **4.1.2 Integration Testing**
 
 Integration testing will focus on verifying that different components of the application work together as expected. This testing will ensure smooth data flow between the front-end, back-end, and external services. The areas of focus will include:
 
@@ -36,7 +34,7 @@ Integration testing will focus on verifying that different components of the app
 
 ---
 
-#### **Performance Testing**
+#### **4.1.3 Performance Testing**
 
 Performance testing is critical for ensuring the application performs optimally under different load conditions. This will involve testing various aspects of the system’s performance to ensure scalability, responsiveness, and reliability. The key focus areas will include:
 
@@ -48,7 +46,5 @@ Performance testing is critical for ensuring the application performs optimally 
   
 - **Network Usage**: The app will be tested to assess its network usage, including the volume of data transferred during route optimizations, updates, and syncs. Performance tests will ensure that network usage is optimized to minimize data consumption, especially in areas with limited or costly data plans.
 
-**Why Performance Testing?**
-Performance testing is essential to ensure the system can handle real-world scenarios, including high traffic, large datasets, and variable network conditions. It helps identify bottlenecks and areas for optimization, ensuring that the application remains responsive and efficient under different usage scenarios.
 
 
